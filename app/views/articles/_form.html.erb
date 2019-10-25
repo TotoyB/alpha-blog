@@ -1,14 +1,4 @@
-<!--<div style="text-align: center">-->
-<% if @article.errors.any? %>
-  <h3> The Following Errors prevented the article to be created </h3>
-  <ul>
-    <% @article.errors.full_messages.each do |error_message| %>
-      <li>
-        <%= error_message %>
-      </li>
-    <% end %>
-  </ul>
-<% end %>
+<%= render 'shared/errors', obj: @article %>
 
 <div class="row">
   <div class="col-xs-12">
@@ -44,4 +34,3 @@
     </div>
   </div>
 </div>
-<!--</div>-->
