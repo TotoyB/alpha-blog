@@ -1,25 +1,47 @@
-<div style="text-align: center">
-  <% if @article.errors.any? %>
-    <h3> The Following Errors prevented the article to be created </h3>
-    <ul>
-      <% @article.errors.full_messages.each do |error_message| %>
-        <li>
-          <%= error_message %>
-        </li>
-      <% end %>
-    </ul>
-  <% end %>
-</div>
-
-<%= form_for @article do |form| %>
-  <div style="text-align: center">
-    <p>
-      <%= form.label :title %> </br>
-      <%= form.text_field :title %> </br></br>
-      <%= form.label :description %></br>
-      <%= form.text_area :description %></br>
-      <%= form.submit %>
-      <%= link_to "Go Back", articles_path %>
-    </p>
-  </div>
+<!--<div style="text-align: center">-->
+<% if @article.errors.any? %>
+  <h3> The Following Errors prevented the article to be created </h3>
+  <ul>
+    <% @article.errors.full_messages.each do |error_message| %>
+      <li>
+        <%= error_message %>
+      </li>
+    <% end %>
+  </ul>
 <% end %>
+
+<div class="row">
+  <div class="col-xs-12">
+    <%= form_for(@article, :html => {class: "form-horizontal", role: "form"}) do |form| %>
+
+      <div class="form-group">
+        <div class="control-label col-sm-2">
+          <%= form.label :title %>
+        </div>
+        <div class="col-sm-7">
+          <%= form.text_field :title, class: "form-control", placeholder: "Title of Article", autofocus: true %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="control-label col-sm-2">
+          <%= form.label :description %></br>
+        </div>
+        <div class="col-sm-7">
+          <%= form.text_area :description, rows: 10, class: "form-control", placeholder: "Enter the Description", autofocus: true %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+        <%= form.submit class: 'btn btn-primary' %>
+        </div>
+      </div>
+    <% end %>
+
+    <div class="col-xs-4 col-xs-offset-2">
+      [ <%= link_to "Go back to Article list", articles_path %> ]
+    </div>
+  </div>
+</div>
+<!--</div>-->
