@@ -1,19 +1,24 @@
 <h1 align="center"> List of Users in Alpha-Blog </h1>
-  <div align="center">
-    <%= will_paginate @user %>
-    <% @user.each do |user| %>
-      <ul class="listing">
-        <div class="row">
-          <div class="well col-md-4 col-md-offset-4">
-            <div align="center">
-              <li> <%= link_to gravatar_for(user), user_path(user) %> </li>
-              <li class="article-title"> <%= link_to user.username, user_path(user) %> </li>
-              <li><small> <%= pluralize(user.articles.count, "article") if user.articles %> </small> </li>
-            </div>
+<div align="center">
+  <%= will_paginate @user %>
+  <% @user.each do |user| %>
+    <ul class="listing">
+      <div class="row">
+        <div class="well col-md-4 col-md-offset-4">
+          <div align="center">
+            <li> <%= link_to gravatar_for(user), user_path(user) %> </li>
+            <li class="article-title"> <%= link_to user.username, user_path(user) %> </li>
+            <li><small> <%= pluralize(user.articles.count, "article") if user.articles %> </small> </li>
+            <% if logged_in? && current_user.admin? %>
+              <%= link_to "Edit User", edit_user_path(user), class: "btn btn-primary"%>
+              <%= link_to "Delete this user", user_path(user), class: "btn btn-danger",
+                          method: :delete,
+                          data: {confirm:"Are you sure you want to delete this user? This action cannot be undone"} %>
+            <% end %>
           </div>
         </div>
-      </ul>
-    <% end %>
-    <%= will_paginate @user %>
-  </div>
+      </div>
+    </ul>
+  <% end %>
+  <%= will_paginate @user %>
 </div>
