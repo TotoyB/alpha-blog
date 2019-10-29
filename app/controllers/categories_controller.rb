@@ -21,6 +21,7 @@ class CategoriesController < ApplicationController
   end
 
   def show
+    @category_articles = @category.articles.paginate(page: params[:page], per_page: 3)
   end
 
   def edit

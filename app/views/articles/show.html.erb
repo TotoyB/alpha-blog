@@ -20,6 +20,11 @@
     <% end %>
     <hr>
     <%= simple_format(@article.description) %>
+
+    <% if @article.categories.any? %>
+      <p> Categories: <%= render 'categories/category', obj: @article %> </p>
+    <% end %>
+
     <div class="article-actions">
       <%= link_to "View All Article", articles_path, class: "btn btn-success" %>
       <% if logged_in? && (current_user == @article.user || current_user.admin?) %>
